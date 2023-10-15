@@ -1,0 +1,13 @@
+.slide-container{
+    width: 100vw;
+    min-width: 100vw;
+    height: calc(100vh - 80px);
+    background-color: darkslategray;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 4vw;
+    color: wheat;
+}
