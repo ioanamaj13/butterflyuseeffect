@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import "./codeView.css";
 
 const LogBox = ({ logLines, clear }) => {
-  const [log, setLog] = useState([logLines]);
-  console.log({log});
-
-  console.log('logLines', logLines);
-
-  useEffect(() => {
-    setLog(logLines);
-    console.log('logLines', logLines);
-  }, [logLines]);
-
   return (
     <div className="log">
       <h3>Log</h3>
-      <button onClick={clear}>Clear</button>
-
-      <div>
+      <div className="log-control">
+        <button onClick={clear}>Clear</button>
+      </div>
+      <div className="log-container">
         {logLines.map((line, index) => {
-          return <p key={index}>{line}</p>;
+          return (
+            <p key={index} className="log-line">
+              {line}
+            </p>
+          );
         })}
       </div>
     </div>

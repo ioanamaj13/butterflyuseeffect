@@ -1,8 +1,9 @@
+import "./codeView.css";
+
 const RenderBox = ({ children }) => {
   return (
     <div>
-      <h3>RenderBox</h3>
-      <div>{children}</div>
+      <div className="render-content">{children}</div>
     </div>
   );
 };

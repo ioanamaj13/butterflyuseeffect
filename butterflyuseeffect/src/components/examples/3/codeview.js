@@ -1,14 +1,12 @@
-
 import CodeBox from "../../codeview/codeBox";
 import LogBox from "../../codeview/log";
 import RenderBox from "../../codeview/renderBox";
 import "../../codeview/codeView.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const CodeView1 = ({ code }) => {
-  const codeExample = 
-  `const CodeView = ({ code }) => {
-    // const codeExample = [code you see here]
+const CodeView3 = ({ code }) => {
+  const codeExample = `const CodeView = ({ code }) => {
+    const codeExample = [code you see here]
     const [logStack, setLogStack] = useState([]);
     const clickHandler = () => {
       setLogStack([...logStack, 'clicked']);
@@ -38,13 +36,28 @@ const CodeView1 = ({ code }) => {
 
   const [logStack, setLogStack] = useState([]);
 
-  const clickHandler = () => {
-    setLogStack([...logStack, 'clicked']);
+  const [count, setCount] = useState(0);
+
+  const clickHandler = (e) => {
+    console.log(e.target.textContent);
+    setLogStack([...logStack, e.target.textContent]);
   };
 
   const handleClear = () => {
     setLogStack([]);
-  }
+  };
+
+  useEffect(() => {
+    console.log("useEffect called");
+    const interval = setInterval(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+
+    return () => {
+      console.log("useEffect cleanup");
+      clearInterval(interval);
+    }
+  }, [])
 
   return (
     <div className="code-view">
@@ -54,15 +67,19 @@ const CodeView1 = ({ code }) => {
       <div className="left">
         <div className="render-box">
           <RenderBox>
-            <button onClick={clickHandler}>Click Me</button>
+            <div>{count}</div>
+            <div>
+              <button onClick={clickHandler}>Start </button>
+              <button onClick={clickHandler}>Stop  </button>
+            </div>
           </RenderBox>
         </div>
         <div className="log-box">
-          <LogBox logLines={logStack} clear={handleClear}/>
+          <LogBox logLines={logStack} clear={handleClear} />
         </div>
       </div>
     </div>
   );
 };
 
-export default CodeView1;
+export default CodeView3;
